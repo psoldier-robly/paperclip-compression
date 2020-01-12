@@ -11,7 +11,6 @@ rvm:
 before_install:
   - gem uninstall -v '>= 2' -i $(rvm gemdir)@global -ax bundler || true
   - gem install bundler -v '< 2'
-before_deploy:
   - for lib in ssl crypto; do ln -s /usr/local/opt/openssl{@1.0,}/lib/lib${lib}.1.0.0.dylib; done
   - rvm reinstall $(travis_internal_ruby) --disable-binary
   - for lib in ssl crypto; do rm /usr/local/opt/openssl/lib/lib${lib}.1.0.0.dylib; done
