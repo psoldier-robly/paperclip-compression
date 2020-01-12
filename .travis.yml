@@ -1,16 +1,15 @@
 os:
-  - linux
+  # - linux
   - osx
 language: ruby
 rvm:
   - 2.1
-  - 2.2
-  - 2.3
-  - 2.4
-  - 2.5
+  # - 2.2
+  # - 2.3
+  # - 2.4
+  # - 2.5
 before_install:
+  - rvm list known
+  - rvm version
   - gem uninstall -v '>= 2' -i $(rvm gemdir)@global -ax bundler || true
   - gem install bundler -v '< 2'
-  - for lib in ssl crypto; do ln -s /usr/local/opt/openssl{@1.0,}/lib/lib${lib}.1.0.0.dylib; done
-  - rvm reinstall $(travis_internal_ruby) --disable-binary
-  - for lib in ssl crypto; do rm /usr/local/opt/openssl/lib/lib${lib}.1.0.0.dylib; done
